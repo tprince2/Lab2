@@ -35,6 +35,25 @@ public class SolveMaze {
          */
         for (int step = 0; step < 1000; step++) {
             // Implement your maze solving algorithm here
+// If the maze isn't finished, move
+            while (maze.isFinished() == false) {
+                // If it can move forward, move
+                while (maze.canMove() == true) {
+                    maze.move();
+                    //If it can't move forward, turn right
+                    if (maze.canMove() == false) {
+                        maze.turnRight();
+                        if (maze.canMove() == false) {
+                            maze.turnLeft();
+                            maze.turnLeft();
+                            //If there are walls on both the right and left, turn left once more to turn around
+                            if (maze.canMove() == false) {
+                                maze.turnLeft();
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         if (maze.isFinished()) {
